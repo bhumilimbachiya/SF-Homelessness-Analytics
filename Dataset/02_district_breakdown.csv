@@ -1,0 +1,12 @@
+District_ID,District_Name,Year,Total_Homeless,Sheltered,Unsheltered,Vehicle_Dwelling,YOY_Change_Pct
+1,District 1,2024,350,180,170,30,-5
+2,District 2,2024,420,210,210,40,-3
+3,District 3,2024,1030,450,580,120,89
+4,District 4,2024,580,290,290,60,10
+5,District 5,2024,1699,800,899,200,-13
+6,District 6,2024,1985,950,1035,250,-14
+7,District 7,2024,310,150,160,40,5
+8,District 8,2024,290,140,150,30,2
+9,District 9,2024,966,400,566,150,15
+10,District 10,2024,1462,300,1162,400,47
+11,District 11,2024,231,99,132,40,-8

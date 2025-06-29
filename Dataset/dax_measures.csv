@@ -1,0 +1,36 @@
+Measure Name,DAX Formula,Description,Used In
+Total Homeless,SUM('01_Population_Trends'[Total_Homeless_Count]),Sum of total homeless population for the selected year,Executive Summary - KPI Card
+YOY % Change,"VAR CurrentYear = MAX('01_Population_Trends'[Year])
+VAR PreviousYear = CurrentYear - 1
+VAR CurrentCount = CALCULATE([Total Homeless], '01_Population_Trends'[Year] = CurrentYear)
+VAR PreviousCount = CALCULATE([Total Homeless], '01_Population_Trends'[Year] = PreviousYear)
+RETURN
+IF(PreviousCount = 0, BLANK(), DIVIDE(CurrentCount - PreviousCount, PreviousCount))",Year-over-year percentage change in homeless population,Executive Summary - KPI Card
+Shelter Rate %,"DIVIDE(SUM('01_Population_Trends'[Sheltered_Count]), SUM('01_Population_Trends'[Total_Homeless_Count]))",Percentage of homeless population that is sheltered,"Executive Summary - KPI Card, Bar Chart"
+Unsheltered Rate %,"DIVIDE(SUM('01_Population_Trends'[Unsheltered_Count]), SUM('01_Population_Trends'[Total_Homeless_Count]))",Percentage of homeless population that is unsheltered,Executive Summary - Bar Chart
+Family Homelessness YOY %,"VAR CurrentYear = MAX('01_Population_Trends'[Year])
+VAR PreviousYear = CurrentYear - 1
+VAR CurrentCount = CALCULATE(SUM('01_Population_Trends'[Family_Homeless_Count]), '01_Population_Trends'[Year] = CurrentYear)
+VAR PreviousCount = CALCULATE(SUM('01_Population_Trends'[Family_Homeless_Count]), '01_Population_Trends'[Year] = PreviousYear)
+RETURN
+IF(PreviousCount = 0, BLANK(), DIVIDE(CurrentCount - PreviousCount, PreviousCount))",Year-over-year percentage change in family homelessness,Executive Summary - KPI Card
+Mental Illness Rate,"CALCULATE(MAX('04_Health_Risk_Factors'[SF_Percentage]), '04_Health_Risk_Factors'[Risk_Factor] = ""Mental Illness"")",Percentage of homeless population with mental illness,Demographics & Risk Profile - Bar Chart
+Substance Use Rate,"CALCULATE(MAX('04_Health_Risk_Factors'[SF_Percentage]), '04_Health_Risk_Factors'[Risk_Factor] = ""Substance Use"")",Percentage of homeless population with substance use disorders,Demographics & Risk Profile - Bar Chart
+SF vs CA Mental Illness Difference,"CALCULATE(MAX('04_Health_Risk_Factors'[SF_Percentage]), '04_Health_Risk_Factors'[Risk_Factor] = ""Mental Illness"") - CALCULATE(MAX('04_Health_Risk_Factors'[CA_Average]), '04_Health_Risk_Factors'[Risk_Factor] = ""Mental Illness"")",Difference between SF and CA average for mental illness rates,Demographics & Risk Profile - Comparison Chart
+Demographic Count,SUM('03_Demographics'[Count]),Count of individuals in the selected demographic category,Demographics & Risk Profile - Pie Charts
+Demographic Percentage,"DIVIDE([Demographic Count], CALCULATE([Demographic Count], ALL('03_Demographics'[Subcategory])))",Percentage of individuals in the selected demographic category,"Demographics & Risk Profile - Pie Charts, Labels"
+District Homeless Count,SUM('02_District_Breakdown'[Total_Homeless]),Total homeless count by district,Geospatial Analysis - Map
+District Sheltered %,"DIVIDE(SUM('02_District_Breakdown'[Sheltered]), SUM('02_District_Breakdown'[Total_Homeless]))",Percentage of homeless population that is sheltered by district,"Geospatial Analysis - Map, Bar Chart"
+District YOY Change,AVERAGE('02_District_Breakdown'[YOY_Change_Pct]),Year-over-year percentage change in homeless population by district,"Geospatial Analysis - Map, Column Chart"
+Vehicle Dwelling %,"DIVIDE(SUM('02_District_Breakdown'[Vehicle_Dwelling]), SUM('02_District_Breakdown'[Total_Homeless]))",Percentage of homeless population living in vehicles by district,"Geospatial Analysis - Map, Bar Chart"
+Total Engagements,SUM('05_Outreach_Programs'[Total_Engagements]),Total number of outreach engagements,"Outreach Program Impact - KPI Card, Column Chart"
+Placement Success Rate,"DIVIDE(SUM('05_Outreach_Programs'[Placed_Housing]), SUM('05_Outreach_Programs'[Total_Engagements]))",Percentage of outreach engagements resulting in housing placement,"Outreach Program Impact - KPI Card, Line Chart"
+Average 311 Response Rate,AVERAGE('05_Outreach_Programs'[Response_Rate_311]),Average response rate to 311 calls,Outreach Program Impact - KPI Card
+Engagement Efficiency,"DIVIDE(SUM('05_Outreach_Programs'[Placed_Housing]), SUM('05_Outreach_Programs'[Total_Engagements]) * 100)",Efficiency of outreach engagements (placements per 100 engagements),Outreach Program Impact - Scatter Plot
+Total Shelter Beds,SUM('06_Housing_Resources'[Shelter_Beds]),Total number of shelter beds available,"Resource Allocation & Gaps - KPI Card, Bar Chart"
+Average Shelter Occupancy,AVERAGE('06_Housing_Resources'[Shelter_Occupancy_Rate]),Average occupancy rate of shelter beds,"Resource Allocation & Gaps - KPI Card, Gauge"
+Total PSH Units,SUM('06_Housing_Resources'[PSH_Units]),Total number of Permanent Supportive Housing units,"Resource Allocation & Gaps - KPI Card, Bar Chart"
+Total PSH Vacant,SUM('06_Housing_Resources'[PSH_Vacant]),Total number of vacant Permanent Supportive Housing units,"Resource Allocation & Gaps - KPI Card, Bar Chart"
+PSH Vacancy Rate,"DIVIDE(SUM('06_Housing_Resources'[PSH_Vacant]), SUM('06_Housing_Resources'[PSH_Units]))",Percentage of Permanent Supportive Housing units that are vacant,"Resource Allocation & Gaps - KPI Card, Gauge"
+Total Budget,SUM('07_Financial_Allocation'[Budget_Allocation]),Total budget allocation for homelessness services,"Resource Allocation & Gaps - KPI Card, Waterfall Chart"
+Budget Percentage,"DIVIDE(SUM('07_Financial_Allocation'[Budget_Allocation]), CALCULATE(SUM('07_Financial_Allocation'[Budget_Allocation]), ALL('07_Financial_Allocation')))",Percentage of total budget allocated to selected program type,"Resource Allocation & Gaps - Pie Chart, Waterfall Chart"

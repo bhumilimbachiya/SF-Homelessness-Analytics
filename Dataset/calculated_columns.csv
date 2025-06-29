@@ -1,0 +1,7 @@
+Table,Column Name,DAX Formula,Description
+01_Population_Trends,Sheltered_Percentage,"DIVIDE([Sheltered_Count], [Total_Homeless_Count])",Percentage of homeless population that is sheltered
+01_Population_Trends,Unsheltered_Percentage,"DIVIDE([Unsheltered_Count], [Total_Homeless_Count])",Percentage of homeless population that is unsheltered
+02_District_Breakdown,Sheltered_Percentage,"DIVIDE([Sheltered], [Total_Homeless])",Percentage of homeless population that is sheltered by district
+02_District_Breakdown,Vehicle_Percentage,"DIVIDE([Vehicle_Dwelling], [Total_Homeless])",Percentage of homeless population living in vehicles by district
+05_Outreach_Programs,Success_Rate,"DIVIDE([Placed_Housing], [Total_Engagements])",Success rate of outreach engagements by district
+06_Housing_Resources,PSH_Vacancy_Rate,"DIVIDE([PSH_Vacant], [PSH_Units])",Vacancy rate of Permanent Supportive Housing units by district
