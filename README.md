@@ -7,16 +7,16 @@ Track and analyze San Francisco's homeless population over time to inform policy
 
 ## 📊 Dashboard Previews  
 ### SF's Homelessness Overview  
-![Overview Dashboard](Images/Overview.jpg)  
+![Overview Dashboard](Images/Overview.png)  
 
 ### Demographics  
-![Demographics Dashboard](Images/demographics.jpg)  
+![Demographics Dashboard](Images/demographics.png)  
 
 ### Geospatial Analysis  
-![Geospatial Analysis Dashboard](Images/geo.jpg)  
+![Geospatial Analysis Dashboard](Images/geo.png)  
 
 ### Outreach Program Impact  
-![Outreach Program Impact Dashboard](Images/Outreach.jpg)  
+![Outreach Program Impact Dashboard](Images/Outreach.png)  
 
 ## 🔍 Data Sources  
 - San Francisco Biennial Point-in-Time (PIT) Count [Source](https://www.sf.gov/data--homeless-population)  
