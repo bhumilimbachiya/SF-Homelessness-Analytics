@@ -22,10 +22,95 @@ Track and analyze San Francisco's homeless population over time to inform policy
 - San Francisco Biennial Point-in-Time (PIT) Count [Source](https://www.sf.gov/data--homeless-population)  
 - Department of Homelessness and Supportive Housing annual reports  
 
+## 📦 Data Model  
+The data model brings together eight fact and lookup tables to support cross-cutting analysis of population trends, district breakdowns, demographics, risk factors, outreach programs, housing resources, financial allocations, and district metadata. Relationships are keyed primarily on `Year` and `District_ID`, with lookup tables providing descriptive context. All DAX measures (e.g., YOY % Change, Shelter Rate %, Success Rate) are defined in the central MeasuresTable.  
+
+![Geospatial Analysis Dashboard](Images/datamodel.png)
+
+**Core Tables & Relationships**  
+- **01_Population_Trends** ↔ **MeasuresTable** (one-to-many on Year)  
+- **02_District_Breakdown** ↔ **08_District_Lookup** (many-to-one on District_ID)  
+- **02_District_Breakdown** ↔ **MeasuresTable** (Year)  
+- **03_Demographics** ↔ **MeasuresTable** (Year)  
+- **04_Health_Risk_Factors** ↔ **MeasuresTable** (Year)  
+- **05_Outreach_Programs** ↔ **08_District_Lookup** (District_ID)  
+- **05_Outreach_Programs** ↔ **MeasuresTable** (Year)  
+- **06_Housing_Resources** ↔ **08_District_Lookup** (District_ID)  
+- **06_Housing_Resources** ↔ **MeasuresTable** (Year)  
+- **07_Financial_Allocation** ↔ **MeasuresTable** (Year)  
+- **district_data** a derived summary view combining 02 through 04 for geospatial mapping  
+- **st_districts_lat_long** spatial lookup joined to **08_District_Lookup** for map coordinates  
+
+This structure ensures consistent filtering by year, seamless drill-through from high-level KPIs to district-level insights, and efficient calculation of all Power BI visuals.
+
+## 🔍 Data Sources  
+- San Francisco Biennial Point-in-Time (PIT) Count [Source](https://www.sf.gov/data--homeless-population)  
+- Department of Homelessness and Supportive Housing annual reports  
+
 ## 🗂️ Dataset Overview  
-- **PIT_counts.csv**: Year, total homeless, sheltered, unsheltered  
-- **Demographics.csv**: Gender, age group, risk factor breakdown  
-- **Engagements.csv**: Outreach engagements, placement success, 311 response rates
+All raw CSVs reside in the `Dataset/` folder. Each file schema is described below:
+
+**01_population_trends.csv**  
+- `Year`  
+- `Total_Homeless_Count`  
+- `Sheltered_Count`  
+- `Unsheltered_Count`  
+- `Chronic_Homeless_Count`  
+- `Family_Homeless_Count`  
+- `Youth_Homeless_Count`  
+- `Veterans_Count`  
+
+**02_district_breakdown.csv**  
+- `District_ID`  
+- `District_Name`  
+- `Year`  
+- `Total_Homeless`  
+- `Sheltered`  
+- `Unsheltered`  
+- `Vehicle_Dwelling`  
+- `YOY_Change_Pct`  
+
+**03_demographics.csv**  
+- `Year`  
+- `Category` (Gender | Age)  
+- `Subcategory` (Male | Female | TGNC | Under 18 | 18–24 | 25–54 | 55+)  
+- `Count`  
+- `Percentage`  
+
+**04_health_risk_factors.csv**  
+- `Year`  
+- `Risk_Factor` (Mental Illness | Substance Use | Complex Behavioral Health | Physical Disability)  
+- `SF_Percentage`  
+- `CA_Average`  
+
+**05_outreach_programs.csv**  
+- `Year`  
+- `District_ID`  
+- `Total_Engagements`  
+- `Placed_Housing`  
+- `Response_Rate_311` (minutes)  
+- `Response_Rate_Encampment` (minutes)  
+
+**06_housing_resources.csv**  
+- `Year`  
+- `District_ID`  
+- `Shelter_Beds`  
+- `Shelter_Occupancy_Rate` (%)  
+- `PSH_Units`  
+- `PSH_Vacant`  
+- `Waitlist_Count`  
+
+**07_financial_allocation.csv**  
+- `Year`  
+- `Program_Type`  
+- `Budget_Allocation` (USD)  
+- `Percentage`  
+- `Per_Capita_Cost` (USD)  
+
+**08_district_lookup.csv**  
+- `District_ID`  
+- `District_Name`  
+- `Region`  
 
 ## 🎯 KPIs & Metrics  
 - Total Homeless Count by Year  
